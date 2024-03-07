@@ -1,0 +1,31 @@
+name: Push workflow
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18.x'
+      - run: npm install
+      - run: npm run build --if-present
+
+      - name: Deploy to netlify
+        uses: netlify/actions/cli@master
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.GOT_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.0892f5ff-b41a-4491-9880-2f9283f51aa7 }}
+        with:
+          args: deploy --dir=build --prod
+          secterts: '["GOT_TOKEN", "NETLIFY_SITE_ID"]'
