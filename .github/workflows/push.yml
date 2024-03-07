@@ -25,7 +25,7 @@ jobs:
         uses: netlify/actions/cli@master
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.GOT_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.0892f5ff-b41a-4491-9880-2f9283f51aa7 }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         with:
           args: deploy --dir=build --prod
-          secterts: '["GOT_TOKEN", "0892f5ff-b41a-4491-9880-2f9283f51aa7"]'
+          secterts: '["GOT_TOKEN", "NETLIFY_SITE_ID"]'
